@@ -1,0 +1,109 @@
+/* ==========================================================================
+   Arc Tab Switcher - style du panneau Ctrl+Tab inspiré d'Arc
+   Cible : #ctrlTab-panel (panneau natif Firefox/Zen)
+   ========================================================================== */
+
+:root {
+  --arc-sw-bg: color-mix(in srgb, #16161c 70%, transparent);
+  --arc-sw-border: rgba(255, 255, 255, 0.10);
+  --arc-sw-radius: 22px;
+  --arc-sw-card-radius: 14px;
+  --arc-sw-card-bg: rgba(255, 255, 255, 0.06);
+  --arc-sw-card-hover: rgba(255, 255, 255, 0.12);
+  --arc-sw-selected-bg: rgba(255, 255, 255, 0.18);
+  --arc-sw-selected-ring: rgba(255, 255, 255, 0.85);
+  --arc-sw-text: rgba(255, 255, 255, 0.92);
+  --arc-sw-gap: 10px;
+}
+
+/* ---- Panneau : fond flou, coins arrondis, sans flèche ni ombre native ---- */
+#ctrlTab-panel {
+  appearance: none !important;
+  -moz-window-shadow: none !important;
+  --panel-background: transparent !important;
+  --panel-border-color: transparent !important;
+  --panel-shadow: none !important;
+  --panel-padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--arc-sw-text) !important;
+}
+
+#ctrlTab-panel::part(content) {
+  background: var(--arc-sw-bg) !important;
+  backdrop-filter: blur(40px) saturate(1.6);
+  border: 1px solid var(--arc-sw-border) !important;
+  border-radius: var(--arc-sw-radius) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  padding: 16px !important;
+  overflow: hidden;
+}
+
+/* ---- Rangée de cartes ---- */
+#ctrlTab-panel .ctrlTab-preview,
+#ctrlTab-panel .ctrlTab-preview * {
+  box-sizing: border-box;
+}
+
+#ctrlTab-panel .ctrlTab-preview {
+  appearance: none !important;
+  background: var(--arc-sw-card-bg) !important;
+  border: 2px solid transparent !important;
+  border-radius: var(--arc-sw-card-radius) !important;
+  margin: calc(var(--arc-sw-gap) / 2) !important;
+  padding: 8px !important;
+  color: var(--arc-sw-text) !important;
+  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+#ctrlTab-panel .ctrlTab-preview:hover {
+  background: var(--arc-sw-card-hover) !important;
+}
+
+/* Carte sélectionnée : anneau clair + léger zoom, comme dans Arc */
+#ctrlTab-panel .ctrlTab-preview[selected] {
+  background: var(--arc-sw-selected-bg) !important;
+  border-color: var(--arc-sw-selected-ring) !important;
+  transform: scale(1.03);
+}
+
+/* ---- Aperçu de la page ---- */
+#ctrlTab-panel .ctrlTab-canvas,
+#ctrlTab-panel .ctrlTab-preview canvas {
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* ---- Favicon + titre sous l'aperçu ---- */
+#ctrlTab-panel .ctrlTab-favicon-container {
+  margin-inline-end: 6px;
+}
+
+#ctrlTab-panel .ctrlTab-favicon-container img,
+#ctrlTab-panel .ctrlTab-favicon-container .tab-icon-image {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+#ctrlTab-panel .ctrlTab-label {
+  color: var(--arc-sw-text) !important;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: start;
+  margin-top: 8px !important;
+}
+
+/* ---- Lien "Tout afficher" : discret ---- */
+#ctrlTab-showAll {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-size: 11.5px;
+}
+#ctrlTab-showAll:hover {
+  color: var(--arc-sw-text) !important;
+}
